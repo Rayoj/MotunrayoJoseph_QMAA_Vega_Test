@@ -28,10 +28,14 @@ jobs:
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
 
-      - name: Install ChromeDriver
+      - name: Get Chrome Version
+        id: chrome_version
+        run: echo "CHROME_VERSION=$(google-chrome --version | awk '{print $3}')" >> $GITHUB_ENV
+
+      - name: Install Matching ChromeDriver
         uses: nanasess/setup-chromedriver@v2
         with:
-          chromedriver-version: latest  # Installs the latest compatible version
+          chromedriver-version: ${{ env.CHROME_VERSION }}  # Use exact Chrome version
 
       - name: Run Selenium Tests
         run: pytest
