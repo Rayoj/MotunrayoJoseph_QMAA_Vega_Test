@@ -48,20 +48,21 @@ class ProductsPage:
 
 # Test Execution Function
 def test_sort_products(headless=False):
-    # Setup WebDriver Options
     chrome_options = Options()
     if headless:
-        chrome_options.add_argument("--headless")  # Run in headless mode
+        chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--window-size=1920x1080")
 
-    # Initialize WebDriver
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(Config.BASE_URL)
+    # Specify ChromeDriver path explicitly
+    service = Service("/usr/local/bin/chromedriver")
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    
+    driver.get("https://www.saucedemo.com/v1/index.html")
     driver.maximize_window()
 
-
-    # Perform login
+    # (Continue with login and test steps...)
+     # Perform login
     login_page = LoginPage(driver)
     login_page.login(Config.USERNAME, Config.PASSWORD)
 
@@ -69,9 +70,8 @@ def test_sort_products(headless=False):
     products_page = ProductsPage(driver)
     products_page.sort_by_lowest_price()
     products_page.verify_sorted_prices()
-
-    # Close browser
     driver.quit()
+
 
 if __name__ == "__main__":
     import argparse
