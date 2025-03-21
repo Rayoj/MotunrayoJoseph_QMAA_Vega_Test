@@ -20,10 +20,13 @@ jobs:
           pip install --upgrade pip
           pip install selenium pytest
 
-      - name: Install Chrome and ChromeDriver
+      - name: Install Chrome & Dependencies
         run: |
           sudo apt update
-          sudo apt install -y google-chrome-stable
+          sudo apt install -y google-chrome-stable xvfb
+
+      - name: Install ChromeDriver
+        run: |
           CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
           wget -q "https://chromedriver.storage.googleapis.com/$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip"
           unzip chromedriver_linux64.zip

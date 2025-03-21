@@ -51,14 +51,14 @@ class ProductsPage:
 def test_sort_products(headless=False):
     chrome_options = Options()
     if headless:
-        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--headless")  # Run headless mode
+    chrome_options.add_argument("--no-sandbox")  # Required for running as root in CI/CD
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Prevent /dev/shm issues
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--window-size=1920x1080")
 
-    # Specify ChromeDriver path explicitly
-    service = Service("/usr/local/bin/chromedriver")
-    driver = webdriver.Chrome(service=service, options=chrome_options)
-    
+    # Initialize WebDriver
+    driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://www.saucedemo.com/v1/index.html")
     driver.maximize_window()
 
