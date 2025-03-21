@@ -51,32 +51,27 @@ class ProductsPage:
 def test_sort_products(headless=False):
     chrome_options = Options()
     if headless:
-        chrome_options.add_argument("--headless")  # Run headless mode
-    chrome_options.add_argument("--no-sandbox")  # Required for running as root in CI/CD
-    chrome_options.add_argument("--disable-dev-shm-usage")  # Prevent /dev/shm issues
+        chrome_options.add_argument("--headless")  # Run in headless mode
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--window-size=1920x1080")
 
     # Initialize WebDriver
     driver = webdriver.Chrome(options=chrome_options)
-    driver.get("https://www.saucedemo.com/v1/index.html")
+    driver.get(Config.BASE_URL)
     driver.maximize_window()
 
-    # (Continue with login and test steps...)
-     # Perform login
+    # Perform login and other test steps
     login_page = LoginPage(driver)
     login_page.login(Config.USERNAME, Config.PASSWORD)
-
-    # Sort products and verify
     products_page = ProductsPage(driver)
     products_page.sort_by_lowest_price()
     products_page.verify_sorted_prices()
+
     driver.quit()
 
 
 if __name__ == "__main__":
     import argparse
-
     parser = argparse.ArgumentParser(description="Run Selenium Test in Headed or Headless Mode")
     parser.add_argument("--headless", action="store_true", help="Run tests in headless mode")
     args = parser.parse_args()
