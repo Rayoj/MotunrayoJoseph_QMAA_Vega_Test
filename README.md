@@ -106,9 +106,45 @@ This script automates the login and logout process for the SauceDemo website and
 python login_logout.py
 ```
 
-## Headless Mode Configuration
 
-To run the tests in headless mode, you need to add an argument for running the tests in the background without the GUI of the browser. In all the scripts, you can include the --headless flag to run the tests in headless mode, which is useful for continuous integration environments or when you don't need the browser's graphical interface.
+## Headless mode instructions
+
+# To run this Selenium test in headless mode through the console, follow these steps:
+
+# Prerequisites
+- Install Python (if not installed)
+
+# Ensure you have Python installed. You can check by running:
+
+```bash
+python --version
+```
+**If python is not installed, download it from python.org.**
+
+# Install Required Dependencies.
+
+# Install Selenium and any required packages using pip:
+
+# pip install selenium
+# Ensure Chrome and ChromeDriver are Installed.
+
+# Steps to run the test in headless mode.
+
+# 1. Open the console
+- On Windows: Open Command Prompt (cmd)
+- On macOS/Linux: Open Terminal
+
+# 2. Navigate to the script's directory
+- Use cd to go to the folder where your script is located.
+
+# 3. Run the test in headless mode
+- Execute the following command:
+ e.g., python obj1_scenario1.py --headless (you should replace with the actual file name.)
+
+# If the test passes, you will see:
+- e.g., Test Passed: Sorting verified successfully!
+
+- If it fails, an AssertionError will be displayed, indicating the issue.
 
 
 Author
