@@ -40,7 +40,7 @@ jobs:
         run: mkdir -p test-results
 
       - name: Run Selenium Tests in Parallel
-        run: pytest -n 4 test_obj1_scenario1.py --junitxml=test-results/junit.xml | tee test_results.log
+        run: pytest -n 4 test_obj1_scenario1.py test_obj1_scenario2.py --junitxml=test-results/junit.xml | tee test_results.log
 
       - name: Upload Test Reports
         if: always()
