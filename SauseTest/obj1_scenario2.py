@@ -64,6 +64,8 @@ else:
 
 # Close browser
 driver.quit()
+
+
 # Headless mode instructions
 
 # To run this Selenium test in headless mode through the console, follow these steps:
