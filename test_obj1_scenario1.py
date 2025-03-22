@@ -54,6 +54,8 @@ def test_sort_products(headless=False):
         chrome_options.add_argument("--headless")  # Run in headless mode
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--window-size=1920x1080")
+    chrome_options.add_argument("--no-sandbox")  # Added for CI environments
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Added for CI environments
 
     # Initialize WebDriver
     driver = webdriver.Chrome(options=chrome_options)
