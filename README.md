@@ -1,13 +1,12 @@
-# MotunrayoJoseph_QMAA_Vega_Test
+## Selenium Test Automation for SauceDemo
 
-Selenium Test Automation for SauceDemo
-Overview
+## Overview
 This project contains a series of automated tests using Selenium WebDriver to interact with the SauceDemo application. The scripts cover the following scenarios:
 
-Login and Sort Products: This script performs login and sorts products by price.
-Add to Cart and Remove Items: This script tests adding products to the cart and removing items.
-End-to-End Test (Login, Add to Cart, Shipping, and Checkout): This script tests the entire user journey from login to checkout.
-End-to-End Test (Login and Logout): This script verifies logging in and logging out functionality.
+1. Login and Sort Products: This script performs login and sorts products by price.
+2. Add to Cart and Remove Items: This script tests adding products to the cart and removing items.
+3. End-to-End Test (Login, Add to Cart, Shipping, and Checkout): This script tests the entire user journey from login to checkout.
+4. End-to-End Test (Login and Logout): This script verifies logging in and logging out functionality.
 
 ## Documentation and Reports
 
