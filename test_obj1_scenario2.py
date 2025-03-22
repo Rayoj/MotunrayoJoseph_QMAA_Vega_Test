@@ -26,8 +26,16 @@ class Locators:
     CART_ITEMS = (By.CLASS_NAME, "shopping_cart_badge")
 
 
-# Initialize WebDriver
+# Initialize WebDriver with necessary options
 options = Options()
+options.add_argument("--headless=new")  # Use new headless mode
+options.add_argument("--no-sandbox")  # Bypass OS security restrictions
+options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
+options.add_argument("--disable-gpu")  # Disable GPU acceleration (for headless mode)
+options.add_argument("--window-size=1920x1080")  # Ensure proper rendering
+options.add_argument("--remote-debugging-port=9222")  # Helps debugging headless Chrome
+
+# Initialize WebDriver
 driver = webdriver.Chrome(options=options)
 driver.get(Config.BASE_URL)
 driver.implicitly_wait(Config.WAIT_TIME)
@@ -64,6 +72,7 @@ else:
 
 # Close browser
 driver.quit()
+
 
 # Headless mode instructions
 
