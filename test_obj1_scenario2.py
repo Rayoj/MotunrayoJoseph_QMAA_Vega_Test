@@ -30,6 +30,9 @@ options.add_argument("--disable-gpu")  # Disables GPU hardware acceleration
 options.add_argument("--disable-dev-shm-usage")  # Prevents issues with shared memory in Docker
 options.add_argument("--remote-debugging-port=9222")  # Debugging in CI environments
 
+# Set the Chrome binary location explicitly
+options.binary_location = "/usr/bin/google-chrome-stable"  # Set the correct path to Chrome binary
+
 # Initialize WebDriver with Chrome options
 driver = webdriver.Chrome(options=options)
 driver.get(Config.BASE_URL)
@@ -65,7 +68,6 @@ else:
 
 # Close the browser
 driver.quit()
-
 
 # Headless mode instructions
 
