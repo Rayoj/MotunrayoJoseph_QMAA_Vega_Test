@@ -8,6 +8,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  actions: write
+  checks: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -30,7 +35,7 @@ jobs:
         run: |
           google-chrome --version
           chromedriver --version
-          
+
       - name: Create test-results directory
         run: mkdir -p test-results
 
@@ -45,7 +50,7 @@ jobs:
           path: |
             test-results/
             screenshots/
-  
+
       - name: Publish Test Results
         if: always()
         uses: dorny/test-reporter@v1
@@ -54,3 +59,5 @@ jobs:
           path: "test-results/junit.xml"
           reporter: java-junit
           fail-on-error: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
