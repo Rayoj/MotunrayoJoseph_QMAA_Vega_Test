@@ -107,30 +107,30 @@ python login_logout.py
 ```
 
 
-## Headless mode instructions
+### Headless mode instructions
 
-# To run this Selenium test in headless mode through the console, follow these steps:
+To run this Selenium test in headless mode through the console, follow these steps:
 
 # Prerequisites
 - Install Python (if not installed)
 
-# Ensure you have Python installed. You can check by running:
+- Ensure you have Python installed. You can check by running:
 
 ```bash
 python --version
 ```
 **If python is not installed, download it from python.org.**
 
-# Install Required Dependencies.
+### Install Required Dependencies.
 
-# Install Selenium and any required packages using pip:
+Install Selenium and any required packages using pip:
 
-# pip install selenium
-# Ensure Chrome and ChromeDriver are Installed.
+- pip install selenium
+- Ensure Chrome and ChromeDriver are Installed.
 
 # Steps to run the test in headless mode.
 
-# 1. Open the console
+### 1. Open the console
 - On Windows: Open Command Prompt (cmd)
 - On macOS/Linux: Open Terminal
 
