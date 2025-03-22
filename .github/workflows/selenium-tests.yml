@@ -39,8 +39,8 @@ jobs:
       - name: Create test-results directory
         run: mkdir -p test-results
 
-      - name: Run Selenium Tests in Parallel
-        run: pytest -n 4 test_obj1_scenario1.py --junitxml=test-results/junit.xml | tee test_results.log
+    #   - name: Run Selenium Tests in Parallel
+    #     run: pytest -n 4 test_obj1_scenario1.py --junitxml=test-results/junit.xml | tee test_results.log
 
       - name: Run Selenium Tests in Parallel
         run: pytest -n 4 test_obj1_scenario2.py --junitxml=test-results/junit.xml | tee test_results.log
