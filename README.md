@@ -10,12 +10,11 @@ This project contains a series of automated tests using Selenium WebDriver to in
 
 ## Documentation and Reports
 
-[Manual Test cases/Bug Reports](https://docs.google.com/spreadsheets/d/1BBfHc9QDRFo4FEbQ5YbqyA8LUGy4udS0DXHnpLA0sFg/edit?gid=1629745064#gid=1629745064)
+- [Manual Test cases/Bug Reports](https://docs.google.com/spreadsheets/d/1BBfHc9QDRFo4FEbQ5YbqyA8LUGy4udS0DXHnpLA0sFg/edit?gid=1629745064#gid=1629745064)
 
+- [Automation Test Cases/Bug Reports](https://docs.google.com/spreadsheets/d/1IKDhQWKng5LtuXNTvAxaXQNKsYYi9WTOmlwAxm4CRpk/edit?gid=1629745064#gid=1629745064)
 
-- [Automation Test Cases/Bug Reports] (https://docs.google.com/spreadsheets/d/1IKDhQWKng5LtuXNTvAxaXQNKsYYi9WTOmlwAxm4CRpk/edit?gid=1629745064#gid=1629745064)
-
-- [Test Report] (https://docs.google.com/document/d/1ZJFGSeQVNEcTtbmf7CP6O0I-25I6zcNyUPIH4V2q8Xs/edit?tab=t.0)
+- [Test Report](https://docs.google.com/document/d/1ZJFGSeQVNEcTtbmf7CP6O0I-25I6zcNyUPIH4V2q8Xs/edit?tab=t.0)
 
 ## Test Coverage
 The test suite covers the following functionalities of the SauceDemo website:
