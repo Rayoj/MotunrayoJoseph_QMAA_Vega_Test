@@ -42,9 +42,10 @@ jobs:
           # Fetch matching ChromeDriver version
           DRIVER_VERSION=$(curl -sSL "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}")
           
+          # If no exact driver found, fallback to latest stable version
           if [ -z "$DRIVER_VERSION" ]; then
-            echo "No exact match for ChromeDriver. Falling back to latest available for major version."
-            DRIVER_VERSION=$(curl -sSL "https://chromedriver.storage.googleapis.com/LATEST_RELEASE" | grep -oP '\d+\.\d+\.\d+')
+            echo "Exact version not found. Falling back to the latest stable release."
+            DRIVER_VERSION=$(curl -sSL "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
           fi
 
           if [ -z "$DRIVER_VERSION" ]; then
