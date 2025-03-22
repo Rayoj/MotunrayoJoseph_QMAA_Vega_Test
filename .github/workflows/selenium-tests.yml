@@ -31,8 +31,11 @@ jobs:
           google-chrome --version
           chromedriver --version
           
+      - name: Create test-results directory
+        run: mkdir -p test-results
+
       - name: Run Selenium Tests
-        run: pytest test_obj1_scenario1.py | tee test_results.log
+        run: pytest test_obj1_scenario1.py --junitxml=test-results/junit.xml | tee test_results.log
 
       - name: Upload Test Reports
         if: always()
@@ -51,5 +54,3 @@ jobs:
           path: "test-results/junit.xml"
           reporter: java-junit
           fail-on-error: false
-      
-        
