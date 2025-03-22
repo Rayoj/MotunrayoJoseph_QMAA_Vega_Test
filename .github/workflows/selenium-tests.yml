@@ -30,6 +30,7 @@ jobs:
         run: |
           google-chrome --version
           chromedriver --version
-
+          
       - name: Run Selenium Tests
-        run: pytest test_obj1_scenario1.py  # Removed --headless
+        run: pytest test_obj1_scenario1.py | tee test_results.log
+        
