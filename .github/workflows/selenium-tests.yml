@@ -26,15 +26,27 @@ jobs:
           pip install --upgrade pip
           pip install selenium pytest
 
-      - name: Install Chrome and ChromeDriver
+      - name: Install unzip and Chrome dependencies
         run: |
           sudo apt update -y
-          sudo apt install -y google-chrome-stable
+          sudo apt install -y unzip google-chrome-stable
+
+      - name: Check Chrome Version
+        run: |
+          google-chrome --version
+
+      - name: Install ChromeDriver
+        run: |
           CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+          echo "Chrome version is $CHROME_VERSION"
           wget -q "https://chromedriver.storage.googleapis.com/134.0.6998.165/chromedriver_linux64.zip"
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
           chmod +x /usr/local/bin/chromedriver
+
+      - name: Check ChromeDriver Version
+        run: |
+          chromedriver --version
 
       - name: Set Chrome options for headless mode
         run: |
