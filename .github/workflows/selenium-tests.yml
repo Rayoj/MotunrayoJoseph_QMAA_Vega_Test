@@ -32,4 +32,4 @@ jobs:
           chromedriver --version
 
       - name: Run Selenium Tests
-        run: pytest test_obj1_scenario1.py --headless
+        run: pytest test_obj1_scenario1.py  # Removed --headless
