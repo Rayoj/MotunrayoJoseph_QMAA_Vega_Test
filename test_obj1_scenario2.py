@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
+
 # Constants
 class Config:
     BASE_URL = "https://www.saucedemo.com/v1/index.html"
@@ -11,29 +12,22 @@ class Config:
     PASSWORD = os.getenv("SAUCE_PASSWORD", "secret_sauce")
     WAIT_TIME = 3  # Wait time in seconds
 
-# Locators
+
+# These are the Locators. I created them here for manageability purposes.
 class Locators:
     USERNAME_FIELD = (By.ID, "user-name")
     PASSWORD_FIELD = (By.ID, "password")
     LOGIN_BUTTON = (By.ID, "login-button")
+
     ADD_TO_CART_BACKPACK = (By.XPATH, "//div[@class='inventory_item'][.//div[text()='Sauce Labs Backpack']]//button")
     ADD_TO_CART_ONESIE = (By.XPATH, "//div[@class='inventory_item'][.//div[text()='Sauce Labs Onesie']]//button")
     BACKPACK_ITEM_LINK = (By.XPATH, "//div[text()='Sauce Labs Backpack']")
     REMOVE_BACKPACK_BUTTON = (By.XPATH, "//button[text()='REMOVE']")
     CART_ITEMS = (By.CLASS_NAME, "shopping_cart_badge")
 
-# Chrome options for headless environment
+
+# Initialize WebDriver
 options = Options()
-options.add_argument("--headless")  # Run in headless mode
-options.add_argument("--no-sandbox")  # Avoids issues with Chrome sandboxing
-options.add_argument("--disable-gpu")  # Disables GPU hardware acceleration
-options.add_argument("--disable-dev-shm-usage")  # Prevents issues with shared memory in Docker
-options.add_argument("--remote-debugging-port=9222")  # Debugging in CI environments
-
-# Set the Chrome binary location explicitly
-options.binary_location = "/usr/bin/google-chrome-stable"  # Set the correct path to Chrome binary
-
-# Initialize WebDriver with Chrome options
 driver = webdriver.Chrome(options=options)
 driver.get(Config.BASE_URL)
 driver.implicitly_wait(Config.WAIT_TIME)
@@ -45,9 +39,11 @@ driver.find_element(*Locators.PASSWORD_FIELD).send_keys(Config.PASSWORD)
 driver.find_element(*Locators.LOGIN_BUTTON).click()
 time.sleep(Config.WAIT_TIME)
 
-# Add items to cart
+# Add the Sauce Labs Backpack to cart
 driver.find_element(*Locators.ADD_TO_CART_BACKPACK).click()
 time.sleep(2)
+
+# Add the Sauce Labs Onesie to cart
 driver.find_element(*Locators.ADD_TO_CART_ONESIE).click()
 time.sleep(2)
 
@@ -66,9 +62,8 @@ if cart_items and cart_items[0].text == "1":
 else:
     print("Unexpected cart count")
 
-# Close the browser
+# Close browser
 driver.quit()
-
 # Headless mode instructions
 
 # To run this Selenium test in headless mode through the console, follow these steps:
