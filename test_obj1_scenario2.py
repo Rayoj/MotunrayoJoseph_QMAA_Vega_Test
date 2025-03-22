@@ -30,15 +30,12 @@ class Locators:
 
 # Initialize WebDriver with necessary options
 options = Options()
+options.add_argument("--headless=new")  # Use new headless mode
 options.add_argument("--no-sandbox")  # Bypass OS security restrictions
 options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource issues
 options.add_argument("--disable-gpu")  # Disable GPU acceleration (for headless mode)
 options.add_argument("--window-size=1920x1080")  # Ensure proper rendering
 options.add_argument("--remote-debugging-port=9222")  # Helps debugging headless Chrome
-
-# Enable logging to capture detailed logs
-options.add_argument('--enable-logging')
-options.add_argument('--v=1')
 
 # Initialize WebDriver
 driver = webdriver.Chrome(options=options)
