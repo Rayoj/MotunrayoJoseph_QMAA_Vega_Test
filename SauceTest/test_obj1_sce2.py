@@ -18,7 +18,6 @@ class Locators:
     USERNAME_FIELD = (By.ID, "user-name")
     PASSWORD_FIELD = (By.ID, "password")
     LOGIN_BUTTON = (By.ID, "login-button")
-
     ADD_TO_CART_BACKPACK = (By.XPATH, "//div[@class='inventory_item'][.//div[text()='Sauce Labs Backpack']]//button")
     ADD_TO_CART_ONESIE = (By.XPATH, "//div[@class='inventory_item'][.//div[text()='Sauce Labs Onesie']]//button")
     BACKPACK_ITEM_LINK = (By.XPATH, "//div[text()='Sauce Labs Backpack']")
