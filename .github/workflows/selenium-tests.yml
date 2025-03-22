@@ -48,7 +48,7 @@ jobs:
           # If no exact driver found, fallback to latest stable release
           if [ -z "$DRIVER_VERSION" ]; then
             echo "Exact version not found. Falling back to the latest stable release."
-            DRIVER_VERSION=$(curl -sSL "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+            DRIVER_VERSION=$(curl -sSL "https://storage.googleapis.com/chrome-for-testing-public/134.0.6998.165/mac-arm64/chrome-mac-arm64.zip")
           fi
 
           # Debugging step: print DRIVER_VERSION after fallback
@@ -60,7 +60,7 @@ jobs:
           fi
 
           # Download and install the correct ChromeDriver version
-          wget -q "https://storage.googleapis.com/chrome-for-testing-public/134.0.6998.165/linux64/chrome-linux64.zip"
+          wget -q "https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip"
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
           chmod +x /usr/local/bin/chromedriver
