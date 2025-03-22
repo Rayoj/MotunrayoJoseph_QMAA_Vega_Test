@@ -28,7 +28,7 @@ jobs:
 
       - name: Install Chrome and ChromeDriver
         run: |
-          sudo apt update
+          sudo apt update -y
           sudo apt install -y google-chrome-stable
           CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
           wget -q "https://chromedriver.storage.googleapis.com/134.0.6998.165/chromedriver_linux64.zip"
