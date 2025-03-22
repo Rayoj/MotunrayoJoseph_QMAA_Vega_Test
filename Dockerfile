@@ -4,7 +4,7 @@ FROM python:3.10-slim
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install required dependencies and Chrome
+# Install required dependencies
 RUN apt-get update && apt-get install -y \
     wget \
     curl \
@@ -19,8 +19,15 @@ RUN apt-get update && apt-get install -y \
     libnss3 \
     libxss1 \
     xdg-utils \
-    google-chrome-stable \
     && rm -rf /var/lib/apt/lists/*
+
+# Add the Google Chrome repository
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN DISTRO=$(lsb_release -c | awk '{print $2}') && \
+    echo "deb [signed-by=/etc/apt/trusted.gpg] http://dl.google.com/linux/chrome/deb/ $DISTRO main" | tee -a /etc/apt/sources.list.d/google-chrome.list
+
+# Install Google Chrome
+RUN apt-get update && apt-get install -y google-chrome-stable
 
 # Install ChromeDriver
 RUN CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f 3 | cut -d '.' -f 1) && \
