@@ -64,8 +64,10 @@ Download ChromeDriver and ensure it is accessible in your PATH or specify the pa
 
 ## Test Scripts
 
-1. Login and Sort Products
-This test script automates the login process for the SauceDemo website and verifies that the products are sorted by price in ascending order.
+1. Login and Sort Products:
+
+This test script automates the login process for the SauceDemo website and verifies that 
+the products are sorted by price in ascending order.
 
 **How to run:**
 
@@ -73,8 +75,10 @@ This test script automates the login process for the SauceDemo website and verif
 python login_sort_products.py --headless  # Run in headless mode
 ```
 
-2. Add to Cart and Remove Items
-This script tests the addition of products to the cart and their removal. It ensures that after removing an item, only one product remains in the cart.
+2. Add to Cart and Remove Items:
+
+This script tests the addition of products to the cart and their removal. It ensures that after removing an item, 
+only one product remains in the cart.
 
 **How to run:**
 
@@ -82,7 +86,8 @@ This script tests the addition of products to the cart and their removal. It ens
 python add_to_cart_remove.py
 ```
 
-3. End-to-End Test (Login, Add to Cart, Shipping, and Checkout)
+3. End-to-End Test (Login, Add to Cart, Shipping, and Checkout):
+
 This script automates the end-to-end process from logging in to the checkout page, entering shipping details, and confirming the order.
 
 **How to run:**
@@ -91,7 +96,8 @@ This script automates the end-to-end process from logging in to the checkout pag
 python end_to_end_checkout.py
 ```
 
-4. End-to-End Test (Login and Logout)
+4. End-to-End Test (Login and Logout):
+
 This script automates the login and logout process for the SauceDemo website and verifies that the user is redirected to the login page after logout.
 
 **How to run:**
