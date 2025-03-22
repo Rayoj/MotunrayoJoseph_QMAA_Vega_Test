@@ -5,18 +5,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
 
-# Constants for Configuration
+# These class config are Constants which is why I made them a class
 class Config:
     BASE_URL = "https://www.saucedemo.com/v1/index.html"
     USERNAME = os.getenv("SAUCE_USERNAME", "standard_user")
     PASSWORD = os.getenv("SAUCE_PASSWORD", "secret_sauce")
     WAIT_TIME = 5  # Wait time in seconds
 
-# Locators for Elements
+#These are the Locators. I created them here for manageability purposes and to avoid Hardcoded Strings.
 class Locators:
     USERNAME_FIELD = (By.ID, "user-name")
     PASSWORD_FIELD = (By.ID, "password")
@@ -24,60 +21,55 @@ class Locators:
     SORT_DROPDOWN = (By.CLASS_NAME, "product_sort_container")
     ITEM_PRICES = (By.CLASS_NAME, "inventory_item_price")
 
-# Login Page Object Model (POM)
+# Page Object Model (POM)
 class LoginPage:
     def __init__(self, driver):
         self.driver = driver
 
     def login(self, username, password):
-        WebDriverWait(self.driver, Config.WAIT_TIME).until(EC.presence_of_element_located(Locators.USERNAME_FIELD)).send_keys(username)
+        self.driver.find_element(*Locators.USERNAME_FIELD).send_keys(username)
         self.driver.find_element(*Locators.PASSWORD_FIELD).send_keys(password)
         self.driver.find_element(*Locators.LOGIN_BUTTON).click()
+        time.sleep(Config.WAIT_TIME)  # Wait for page transition
 
-# Products Page Object Model (POM)
 class ProductsPage:
     def __init__(self, driver):
         self.driver = driver
 
     def sort_by_lowest_price(self):
-        sort_dropdown = WebDriverWait(self.driver, Config.WAIT_TIME).until(EC.element_to_be_clickable(Locators.SORT_DROPDOWN))
+        sort_dropdown = self.driver.find_element(*Locators.SORT_DROPDOWN)
         Select(sort_dropdown).select_by_value("lohi")
+        time.sleep(Config.WAIT_TIME)  # Allow sorting to take effect
 
     def verify_sorted_prices(self):
-        item_prices = WebDriverWait(self.driver, Config.WAIT_TIME).until(EC.presence_of_all_elements_located(Locators.ITEM_PRICES))
+        item_prices = self.driver.find_elements(*Locators.ITEM_PRICES)
         prices = [float(price.text.replace("$", "")) for price in item_prices]
         assert prices == sorted(prices), "Sorting failed: Prices are not in ascending order"
         print("Test Passed: Sorting verified successfully!")
 
 # Test Execution Function
-def test_sort_products(headless=False):
+def test_sort_products(headless=True):
     chrome_options = Options()
     if headless:
         chrome_options.add_argument("--headless")  # Run in headless mode
-        chrome_options.add_argument("--disable-gpu")
-        chrome_options.add_argument("--remote-debugging-port=9222")  # Helps with headless debugging
-
+    chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--window-size=1920x1080")
-    chrome_options.add_argument("--no-sandbox")  # Required for CI environments
-    chrome_options.add_argument("--disable-dev-shm-usage")  # Required for CI environments
+    chrome_options.add_argument("--no-sandbox")  # Added for CI environments
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Added for CI environments
 
-    # Initialize WebDriver Safely
-    try:
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-        driver.get(Config.BASE_URL)
-        driver.maximize_window()
+    # Initialize WebDriver
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get(Config.BASE_URL)
+    driver.maximize_window()
 
-        # Perform login and other test steps
-        login_page = LoginPage(driver)
-        login_page.login(Config.USERNAME, Config.PASSWORD)
+    # Perform login and other test steps
+    login_page = LoginPage(driver)
+    login_page.login(Config.USERNAME, Config.PASSWORD)
+    products_page = ProductsPage(driver)
+    products_page.sort_by_lowest_price()
+    products_page.verify_sorted_prices()
 
-        products_page = ProductsPage(driver)
-        products_page.sort_by_lowest_price()
-        products_page.verify_sorted_prices()
-    except Exception as e:
-        print(f"Test failed due to error: {e}")
-    finally:
-        driver.quit()
+    driver.quit()
 
 
 if __name__ == "__main__":
@@ -86,6 +78,8 @@ if __name__ == "__main__":
     parser.add_argument("--headless", action="store_true", help="Run tests in headless mode")
     args = parser.parse_args()
     test_sort_products(headless=args.headless)
+
+
 
 
     # Headless mode instructions
