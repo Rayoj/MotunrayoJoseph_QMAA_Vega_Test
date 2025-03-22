@@ -41,6 +41,7 @@ driver.get(Config.BASE_URL)
 driver.implicitly_wait(Config.WAIT_TIME)
 driver.maximize_window()
 
+
 # Login
 driver.find_element(*Locators.USERNAME_FIELD).send_keys(Config.USERNAME)
 driver.find_element(*Locators.PASSWORD_FIELD).send_keys(Config.PASSWORD)
@@ -72,7 +73,6 @@ else:
 
 # Close browser
 driver.quit()
-
 
 # Headless mode instructions
 
