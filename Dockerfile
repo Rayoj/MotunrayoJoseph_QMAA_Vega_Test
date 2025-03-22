@@ -44,4 +44,4 @@ WORKDIR /app
 COPY . /app
 
 # Command to run the tests
-CMD ["pytest", "test_obj1_scenario1.py", "--headless"]
+CMD ["pytest", "test_obj1_scenario1.py"]
