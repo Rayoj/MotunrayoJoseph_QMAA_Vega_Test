@@ -21,13 +21,10 @@ RUN apt-get update && apt-get install -y \
     xdg-utils \
     && rm -rf /var/lib/apt/lists/*
 
-# Add the Google Chrome repository
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN DISTRO=$(lsb_release -c | awk '{print $2}') && \
-    echo "deb [signed-by=/etc/apt/trusted.gpg] http://dl.google.com/linux/chrome/deb/ $DISTRO main" | tee -a /etc/apt/sources.list.d/google-chrome.list
-
-# Install Google Chrome
-RUN apt-get update && apt-get install -y google-chrome-stable
+# Download and install Google Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    dpkg -i google-chrome-stable_current_amd64.deb || apt-get install -f -y && \
+    rm google-chrome-stable_current_amd64.deb
 
 # Install ChromeDriver
 RUN CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f 3 | cut -d '.' -f 1) && \
