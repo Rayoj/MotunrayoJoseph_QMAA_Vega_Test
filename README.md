@@ -147,8 +147,5 @@ Install Selenium and any required packages using pip:
 - If it fails, an AssertionError will be displayed, indicating the issue.
 
 
-Author
-
-**Motunrayo Joseph**
 
 
