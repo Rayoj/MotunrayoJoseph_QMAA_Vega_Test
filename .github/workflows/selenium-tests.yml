@@ -41,19 +41,24 @@ jobs:
           echo "Chrome version is $CHROME_VERSION"
           # Fetch matching ChromeDriver version
           DRIVER_VERSION=$(curl -sSL "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}")
-          
-          # If no exact driver found, fallback to latest stable version
+
+          # Debugging step: print DRIVER_VERSION
+          echo "Attempting to fetch ChromeDriver version for $CHROME_VERSION: $DRIVER_VERSION"
+
+          # If no exact driver found, fallback to latest stable release
           if [ -z "$DRIVER_VERSION" ]; then
             echo "Exact version not found. Falling back to the latest stable release."
             DRIVER_VERSION=$(curl -sSL "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
           fi
 
+          # Debugging step: print DRIVER_VERSION after fallback
+          echo "Using ChromeDriver version: $DRIVER_VERSION"
+
           if [ -z "$DRIVER_VERSION" ]; then
-            echo "Failed to fetch ChromeDriver version."
+            echo "Failed to fetch ChromeDriver version. Exiting."
             exit 1
           fi
 
-          echo "ChromeDriver version is $DRIVER_VERSION"
           # Download and install the correct ChromeDriver version
           wget -q "https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip"
           unzip chromedriver_linux64.zip
